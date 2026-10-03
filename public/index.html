@@ -57,11 +57,12 @@
             <!-- Messages appear here -->
         </div>
 
-        <div class="chat-input-area">
-            <input type="text" id="messageInput" placeholder="Chant your dark message into the void..." autocomplete="off" onkeypress="handleKeypress(event)">
-            <button onclick="sendMessage()">Scream</button>
-        </div>
-    </div>
+       <div class="chat-input-area">
+    <input type="file" id="imageInput" accept="image/*" style="display: none;" onchange="handleImageSelect(event)">
+    <button class="attach-btn" onclick="document.getElementById('imageInput').click()" title="Attach Image">📎</button>
+    <input type="text" id="messageInput" placeholder="Chant your dark message into the void..." autocomplete="off" onkeypress="handleKeypress(event)">
+    <button onclick="sendMessage()">Scream</button>
+</div>
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="script.js"></script>

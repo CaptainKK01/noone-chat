@@ -242,6 +242,7 @@ button:hover {
     font-weight: bold;
 }
 
+/* Chat Input & Image Attachment Styling */
 .chat-input-area {
     width: 100%;
     display: flex;
@@ -254,4 +255,28 @@ button:hover {
 
 .chat-input-area button {
     width: 120px;
+}
+
+.attach-btn {
+    width: 50px !important;
+    background: #1a0303;
+    border: 1px solid #7f1d1d;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s;
+}
+
+.attach-btn:hover {
+    background: #7f1d1d;
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+}
+
+.msg-image-container img {
+    border: 1px solid rgba(239, 68, 68, 0.4);
+    max-height: 250px;
+    object-fit: cover;
 }

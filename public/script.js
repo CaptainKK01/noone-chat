@@ -95,6 +95,51 @@ socket.on('receive_message', ({ username, message, time }) => {
     chatMessages.scrollTop = chatMessages.scrollHeight;
 });
 
+// 6. Image Handling Logic (Max size: 50MB)
+function handleImageSelect(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    // Limit file size to 50 MB
+    const maxSize = 50 * 1024 * 1024;
+    if (file.size > maxSize) {
+        alert("Image size must be less than 50MB.");
+        event.target.value = '';
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const base64Image = e.target.result;
+        socket.emit('send_image', { 
+            roomId: currentRoomId, 
+            username: myUsername, 
+            image: base64Image,
+            time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        });
+    };
+    reader.readAsDataURL(file);
+    event.target.value = ''; // Reset input
+}
+
+socket.on('receive_image', ({ username, image, time }) => {
+    const chatMessages = document.getElementById('chatMessages');
+    const msgDiv = document.createElement('div');
+    
+    const isMe = username === myUsername;
+    msgDiv.className = `message ${isMe ? 'outgoing' : 'incoming'}`;
+    
+    msgDiv.innerHTML = `
+        <span class="msg-user">${isMe ? 'You' : username} • ${time}</span>
+        <div class="msg-image-container">
+            <img src="${image}" alt="Shared Image" style="max-width: 100%; border-radius: 0.4rem; margin-top: 0.3rem; cursor: pointer;" onclick="window.open(this.src)">
+        </div>
+    `;
+    
+    chatMessages.appendChild(msgDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+});
+
 function appendSystemMessage(text) {
     const chatMessages = document.getElementById('chatMessages');
     const msgDiv = document.createElement('div');

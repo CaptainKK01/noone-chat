@@ -4,66 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NoOne - Hell Edition</title>
-    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Cinzel:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Google Fonts for Horror/Dark Aesthetic -->
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Hellish Background Flames/Overlay -->
     <div class="hell-overlay"></div>
 
-    <!-- GhostID Entry Modal -->
+    <!-- Username Modal Screen -->
     <div id="usernameModal" class="modal-overlay">
-        <div class="modal-box satanic-border">
-            <h2 class="hell-title">NoOne</h2>
-            <p>Enter your GhostID to summon your identity.</p>
-            <input type="text" id="usernameInput" placeholder="e.g. ShadowFiend" autocomplete="off" maxlength="15">
-            <button onclick="setUsername()">Enter the Abyss</button>
+        <div class="modal-box">
+            <h1 class="hell-title">NOONE</h1>
+            <p>Enter the abyss. Declare your GhostID.</p>
+            <input type="text" id="usernameInput" placeholder="Your GhostID..." autocomplete="off">
+            <button onclick="setUsername()">Materialize</button>
         </div>
     </div>
 
-    <!-- Lobby Screen -->
+    <!-- Lobby Screen (Hidden initially) -->
     <div id="lobbyScreen" class="screen hidden">
-        <div class="lobby-card satanic-border">
-            <h1 class="hell-title">NoOne</h1>
-            <p class="subtitle">Whispers from the dark. Leave no trace.</p>
-            <div class="user-badge">Bound GhostID: <span id="displayUsername" style="color: #ef4444; font-weight: bold;"></span></div>
-
+        <div class="lobby-card">
+            <h2 class="hell-title">LOBBY</h2>
+            <div class="user-badge">Logged in as: <span id="displayUsername"></span></div>
             <div class="lobby-actions">
                 <div class="action-box">
-                    <h3>Forge a Private Domain</h3>
-                    <button onclick="createRoom()">Create Space</button>
+                    <h3>Create a Private Realm</h3>
+                    <button onclick="createRoom()">Forge Domain</button>
                 </div>
-                <div class="divider">⚡ OR ⚡</div>
+                <div class="divider">OR</div>
                 <div class="action-box">
-                    <h3>Infiltrate an Existing Realm</h3>
-                    <input type="text" id="roomIdInput" placeholder="Enter Space ID" autocomplete="off">
-                    <button onclick="joinRoom()">Join Space</button>
+                    <h3>Infiltrate a Realm</h3>
+                    <input type="text" id="roomIdInput" placeholder="Enter Space ID..." autocomplete="off">
+                    <button onclick="joinRoom()">Infiltrate</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Chat Room Screen -->
+    <!-- Active Chat Room Screen (Hidden initially) -->
     <div id="chatScreen" class="screen hidden">
-        <div class="chat-header satanic-border">
-            <div class="room-info">
-                <span>Space ID: <strong id="activeRoomId" class="danger-font"></strong></span>
+        <div class="chat-header">
+            <div>
+                <span class="danger-font">REALM:</span> <span id="activeRoomId" style="color: #fca5a5; font-weight: bold;"></span>
             </div>
-            <button class="leave-btn" onclick="leaveRoom()">Banish & Destroy Space</button>
+            <button class="leave-btn" onclick="leaveRoom()">Abandon Portal</button>
         </div>
 
         <div id="chatMessages" class="chat-messages">
-            <!-- Messages appear here -->
+            <!-- Messages stream here -->
         </div>
 
-       <div class="chat-input-area">
-    <input type="file" id="imageInput" accept="image/*" style="display: none;" onchange="handleImageSelect(event)">
-    <button class="attach-btn" onclick="document.getElementById('imageInput').click()" title="Attach Image">📎</button>
-    <input type="text" id="messageInput" placeholder="Chant your dark message into the void..." autocomplete="off" onkeypress="handleKeypress(event)">
-    <button onclick="sendMessage()">Scream</button>
-</div>
+        <div class="chat-input-area">
+            <input type="file" id="imageInput" accept="image/*" style="display: none;" onchange="handleImageSelect(event)">
+            <button class="attach-btn" onclick="document.getElementById('imageInput').click()" title="Attach Image">📎</button>
+            <input type="text" id="messageInput" placeholder="Chant your dark message into the void..." autocomplete="off" onkeypress="handleKeypress(event)">
+            <button onclick="sendMessage()">Scream</button>
+        </div>
+    </div>
 
+    <!-- Socket.io Library -->
     <script src="/socket.io/socket.io.js"></script>
     <script src="script.js"></script>
 </body>

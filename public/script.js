@@ -65,12 +65,8 @@ function sendMessage() {
     const message = input.value.trim();
     if (!message) return;
 
-    socket.emit('send_message', { roomId: currentRoomId, username: MyUsernameCheck(myUsername), message });
+    socket.emit('send_message', { roomId: currentRoomId, username: myUsername, message });
     input.value = '';
-}
-
-function MyUsernameCheck(name) {
-    return name;
 }
 
 function handleKeypress(e) {

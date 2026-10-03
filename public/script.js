@@ -65,6 +65,7 @@ function sendMessage() {
     const message = input.value.trim();
     if (!message) return;
 
+    socket.emit('stop_typing', { roomId: currentRoomId, username: myUsername });
     socket.emit('send_message', { roomId: currentRoomId, username: myUsername, message });
     input.value = '';
 }
@@ -160,3 +161,29 @@ function escapeHtml(text) {
     };
     return text.replace(/[&<>"']/g, function(m) { return map[m]; });
 }
+// --- Typing Indicator Logic ---
+let typingTimeout = null;
+
+const messageInputElem = document.getElementById('messageInput');
+if (messageInputElem) {
+    messageInputElem.addEventListener('input', () => {
+        socket.emit('typing', { roomId: currentRoomId, username: myUsername });
+        
+        clearTimeout(typingTimeout);
+        typingTimeout = setTimeout(() => {
+            socket.emit('stop_typing', { roomId: currentRoomId, username: myUsername });
+        }, 1500); // Stop typing status after 1.5 seconds of inactivity
+    });
+}
+
+socket.on('display_typing', ({ username }) => {
+    const indicator = document.getElementById('typingIndicator');
+    indicator.textContent = `⚡ Soul '${username}' is invoking a message...`;
+});
+
+socket.on('hide_typing', ({ username }) => {
+    const indicator = document.getElementById('typingIndicator');
+    if (indicator.textContent.includes(username)) {
+        indicator.textContent = '';
+    }
+});

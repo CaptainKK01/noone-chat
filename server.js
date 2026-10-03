@@ -19,6 +19,14 @@ app.use(express.static('public'));
 const activeRooms = {};
 
 io.on('connection', (socket) => {
+    // Handle typing indicator events
+    socket.on('typing', ({ roomId, username }) => {
+        socket.to(roomId).emit('display_typing', { username });
+    });
+
+    socket.on('stop_typing', ({ roomId, username }) => {
+        socket.to(roomId).emit('hide_typing', { username });
+    });
     console.log(`A soul connected: ${socket.id}`);
 
     // Create a new room

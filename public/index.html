@@ -51,11 +51,16 @@
             <button class="leave-btn" onclick="leaveRoom()">Abandon Portal</button>
         </div>
 
-        <div id="chatMessages" class="chat-messages">
+       <div id="chatMessages" class="chat-messages">
             <!-- Messages stream here -->
         </div>
 
+        <!-- Typing Indicator Area -->
+        <div id="typingIndicator" class="typing-indicator"></div>
+
         <div class="chat-input-area">
+
+
             <input type="file" id="imageInput" accept="image/*" style="display: none;" onchange="handleImageSelect(event)">
             <button class="attach-btn" onclick="document.getElementById('imageInput').click()" title="Attach Image">📎</button>
             <input type="text" id="messageInput" placeholder="Chant your dark message into the void..." autocomplete="off" onkeypress="handleKeypress(event)">

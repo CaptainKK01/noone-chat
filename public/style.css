@@ -280,3 +280,11 @@ button:hover {
     max-height: 250px;
     object-fit: cover;
 }
+.typing-indicator {
+    height: 22px;
+    font-size: 0.75rem;
+    color: #fca5a5;
+    font-style: italic;
+    padding-left: 0.5rem;
+    text-shadow: 0 0 5px rgba(239, 68, 68, 0.4);
+}
